@@ -1,0 +1,20 @@
+# Whisper size series (checkpoints of MathSpeech, Table 2): openai/whisper-small, 244M parameters, through the Whisper wrapper.
+id: whisper_small
+checkpoint: openai/whisper-small
+revision: 973afd24965f72e36ca33b3055d56a652f456b4d
+env_name: ch3
+framework: transformers==5.17.0
+dtype: float16
+batch_size: 8
+sampling_rate: 16000
+generation:
+  task: transcribe
+  language: en                # every condition forces English
+  num_beams: 1
+  do_sample: false
+  temperature: 0.0            # scalar; no fallback ladder
+  condition_on_prev_tokens: false
+  max_new_tokens: 200
+  return_timestamps: false
+  prompt_condition_type: first-segment   # the only value for short-form audio (transformers docs)
+prompt_slot: prefix           # prompt_ids via processor.get_prompt_ids

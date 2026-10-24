@@ -1,0 +1,19 @@
+# Environment: OWSM v4 (ESPnet)
+espnet==202610.post2
+espnet_model_zoo==0.1.11
+torch==2.11.0
+torchaudio==2.11.0
+sentencepiece==0.2.1
+librosa
+soundfile>=0.12
+jiwer==4.0.0
+rapidfuzz>=3.14
+regex>=2024.0
+pyyaml>=6.0
+jsonschema>=4.0
+jamo>=0.4
+numpy>=2.0
+huggingface_hub>=0.35
+statsmodels==0.15.0
+datasets
+scipy

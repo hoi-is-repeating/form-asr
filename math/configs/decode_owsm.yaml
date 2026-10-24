@@ -1,0 +1,16 @@
+# Decode configuration for recognizer `owsm` (English).
+id: owsm
+checkpoint: espnet/owsm_v4_medium_1B
+revision: 2e27c99d9be596ce188997d80d0e50408cae54a7
+env_name: ch3-espnet
+framework: espnet==202610.post2
+dtype: float32
+batch_size: 8                 # one beam search per minibatch (Speech2Text.batch_decode)
+sampling_rate: 16000
+lang_sym: "<eng>"
+task_sym: "<asr>"
+generation:
+  beam_size: 1            # greedy
+  maxlenratio: 1.0
+  predict_time: false
+prompt_slot: prefix       # text_prev -> <sop> + text before <sos> (espnet2/bin/s2t_inference.py)

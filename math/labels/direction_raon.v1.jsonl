@@ -1,0 +1,5 @@
+{"category": "numbers", "recognizer_id": "raon", "n_word_side": 539, "n_symbol_side": 797, "deciding": true, "dominant": "notation", "fallback": 0, "fallback_reason": null}
+{"category": "operators", "recognizer_id": "raon", "n_word_side": 2235, "n_symbol_side": 1, "deciding": true, "dominant": "words", "fallback": 0, "fallback_reason": null}
+{"category": "roots_exponents", "recognizer_id": "raon", "n_word_side": 761, "n_symbol_side": 0, "deciding": true, "dominant": "words", "fallback": 0, "fallback_reason": null}
+{"category": "greek", "recognizer_id": "raon", "n_word_side": 297, "n_symbol_side": 0, "deciding": false, "dominant": null, "fallback": 0, "fallback_reason": "non-deciding category (descriptive)"}
+{"category": "functions", "recognizer_id": "raon", "n_word_side": 279, "n_symbol_side": 0, "deciding": false, "dominant": null, "fallback": 0, "fallback_reason": "non-deciding category (descriptive)"}

@@ -1,0 +1,16 @@
+# Environment: Qwen3-ASR and Raon-Speech (transformers 4.x)
+qwen-asr==0.0.6
+torch==2.8.0
+soundfile
+torchaudio==2.8.0
+numpy
+statsmodels==0.15.0
+datasets
+scipy
+jiwer==4.0.0
+rapidfuzz>=3.14
+regex>=2024.0
+pyyaml>=6.0
+jsonschema>=4.0
+jamo>=0.4
+huggingface_hub>=0.35

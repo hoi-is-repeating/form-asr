@@ -1,0 +1,15 @@
+# Decode configuration for recognizer `voxtral`.
+id: voxtral
+checkpoint: mistralai/Voxtral-Mini-4B-Realtime-2602
+revision: 2769294da9567371363522aac9bbcfdd19447add
+env_name: ch3
+framework: transformers>=5.2
+dtype: bfloat16
+batch_size: 1
+sampling_rate: 16000
+transcription_delay_ms: 480   # tekken.json default (card)
+generation:
+  do_sample: false            # card: "Always set the temperature to 0.0"
+  num_beams: 1
+  max_new_tokens: 256
+prompt_slot: unsupported

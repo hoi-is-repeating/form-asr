@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the thesis."
+title: "FORM: Form-tolerant Outcomes of Recognition for Multi-form Items"
+type: software
+authors:
+  - family-names: Kim
+    given-names: Olivia S.
+    affiliation: Emory University
+license: MIT
+preferred-citation:
+  type: thesis
+  title: "FORM: Form-tolerant Outcomes of Recognition for Multi-form Items"
+  authors:
+    - family-names: Kim
+      given-names: Olivia S.
+  institution:
+    name: Emory University
+  thesis-type: "M.S. thesis"
+  year: 2026

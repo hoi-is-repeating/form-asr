@@ -1,0 +1,13 @@
+{
+ "2 OVER SQRT PI": "$2/\\sqrt{\\pi}$",
+ "x POW 2 PLUS 1 EQ 0": "$x^2 + 1 = 0$",
+ "a x PLUS b y PLUS c z EQ d": "$ax + by = d$",
+ "INT SUB 0 POW 1 f OF x d x": "$\\int_0^1 f(x)\\,dx$",
+ "SIN POW 2 THETA PLUS COS POW 2 THETA EQ 1": "$\\sin^2\\theta + \\cos^2\\theta = 1$",
+ "1 OVER 2": "$\\frac{1}{2}$",
+ "21 OVER 7": "$21/7$",
+ "x SUB i": "$x_i$",
+ "e POW MINUS t POW 2": "$e^{-t^2}$",
+ "n FACT": "$n!$",
+ "2 OVER SQRT e": "$2/\\sqrt{e}$"
+}

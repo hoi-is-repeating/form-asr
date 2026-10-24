@@ -1,0 +1,134 @@
+# Canonicalization grammar for spoken mathematics.
+# Both the reference spoken form and the hypothesis are mapped through these rules; R_i = 1 iff the canonical strings agree.
+# Each rule lists its WORD-side surfaces (how the item is said / written in words) and its SYMBOL-side surfaces (how it is written
+# in notation). Which side fired on the hypothesis determines F_i (words / notation / mixed). Phrases are matched longest-first.
+#
+# The canonical string is a RECOGNITION KEY, not a parse: it records which mathematical words, numbers and symbols were produced
+# and in what order. Scope and grouping ("square root of two minus two cosine t") are not resolved here: the spoken reference does not
+# carry them either, and they are scored at the conversion stage (LaTeX, NormalizeFormula). What the key does keep is every spoken
+# word that changes which expression was said: "f of x" != "f x" (application vs product), "from a to b" (bounds), "is less than" != "is".
+version: mathforms.v4
+
+# Multi-word phrases rewritten first (longest first). Target tokens are upper-case canonical symbols.
+phrases:
+  - {canon: SQRT,   words: ["the square root of", "square root of", "root of", "square root"], symbols: ["sqrt", "√"]}
+  - {canon: CBRT,   words: ["the cube root of", "cube root of"], symbols: ["cbrt", "∛"]}
+  - {canon: OVER,   words: ["divided by", "over"], symbols: ["/", "÷"]}
+  - {canon: EQ,     words: ["is equal to", "equal to", "equals to", "equals", "is"], symbols: ["="]}
+  - {canon: NEQ,    words: ["is not equal to", "not equal to", "does not equal"], symbols: ["≠", "!="]}
+  - {canon: LEQ,    words: ["is less than or equal to", "less than or equal to", "is at most", "at most"], symbols: ["≤", "<="]}
+  - {canon: GEQ,    words: ["is greater than or equal to", "greater than or equal to", "is at least", "at least"], symbols: ["≥", ">="]}
+  - {canon: LT,     words: ["is less than", "is smaller than", "less than", "smaller than"], symbols: ["<"]}
+  - {canon: GT,     words: ["is greater than", "is bigger than", "is larger than", "greater than", "bigger than", "larger than"], symbols: [">"]}
+  - {canon: PLUS,   words: ["plus", "added to"], symbols: ["+"]}
+  - {canon: MINUS,  words: ["minus", "subtract", "take away", "negative"], symbols: ["-"]}
+  - {canon: TIMES,  words: ["times", "multiplied by"], symbols: ["×", "*", "·"]}
+  - {canon: POW,    words: ["raised to the power of", "raised to the power", "to the power of", "to the power", "raised to", "to the"], symbols: ["^", "**"]}
+  - {canon: "POW 2", words: ["squared"], symbols: []}
+  - {canon: "POW 3", words: ["cubed"], symbols: []}
+  - {canon: SUB,    words: ["sub", "subscript"], symbols: ["_"]}
+  - {canon: FACT,   words: ["factorial"], symbols: ["!"]}
+  - {canon: PCT,    words: ["percent", "per cent"], symbols: ["%"]}
+  - {canon: DEG,    words: ["degrees", "degree"], symbols: ["°"]}
+  - {canon: INF,    words: ["infinity"], symbols: ["∞"]}
+  - {canon: "INT INT INT", words: ["the triple integral of", "triple integral of", "triple integral"], symbols: []}   # the triple-integral sign becomes three integral signs under NFKC
+  - {canon: "INT INT", words: ["the double integral of", "double integral of", "double integral"], symbols: []}       # the double-integral sign becomes two integral signs under NFKC
+  - {canon: INT,    words: ["the integral of", "integral of", "integral"], symbols: ["∫"]}
+  - {canon: SUM,    words: ["the sum of", "sum of", "sum", "summation"], symbols: ["∑"]}   # "sigma" is the Greek letter
+  - {canon: PROD,   words: ["the product of", "product of", "product"], symbols: ["∏"]}
+  - {canon: DERIV,  words: ["d by d", "the derivative of", "derivative of"], symbols: []}   # symbol side "d/d" via post_rewrites
+  - {canon: PARTIAL, words: ["partial"], symbols: ["∂"]}
+  - {canon: ARROW,  words: ["goes to", "approaches", "tends to"], symbols: ["→", "->"]}     # limits: "as x goes to infinity"
+  - {canon: LPAREN, words: ["open parenthesis", "open paren", "open bracket", "quantity"], symbols: ["(", "[", "{"]}
+  - {canon: RPAREN, words: ["close parenthesis", "close paren", "close bracket", "end quantity"], symbols: [")", "]", "}"]}
+  - {canon: ABS,    words: ["the absolute value of", "absolute value of"], symbols: ["|"]}
+  - {canon: "PRIME PRIME PRIME", words: ["triple prime"], symbols: []}
+  - {canon: "PRIME PRIME", words: ["double prime"], symbols: []}
+  - {canon: PRIME,  words: ["prime"], symbols: ["'"]}
+  - {canon: DOT,    words: ["point", "dot"], symbols: ["."]}
+  - {canon: COMMA,  words: [], symbols: [","]}
+
+# Function application. "of" is kept as the token OF where it changes the expression: after a single-letter variable (or a
+# variable followed by PRIME / DOT), so "f of x" (f(x)) differs from "f x" (a product). The notation side is an opening
+# parenthesis in that position: "f(x)" -> f OF x. Elsewhere "of" is absorbed by the operator surface ("square root of") or dropped
+# ("sine of x" = "sin(x)"), and "(" is grouping (not compared). "of" is not application right after the variable of
+# differentiation (the letter after DERIV or PARTIAL OVER PARTIAL): "d by d x of f" = "d/dx f" (DERIV x f).
+application: {canon: OF, word: "of", symbol: "(", differentiation_surfaces: ["d by d"], partial_patterns: [["PARTIAL", "OVER", "PARTIAL"], ["PARTIAL", "PARTIAL"]]}
+
+# Bounds of big operators: directly after INT / SUM / PROD, "from A to B" gives the same key as notation with subscript and
+# superscript bounds ("from" -> SUB, the next "to" -> POW). The first "of" after the upper bound is the integrand marker and is
+# dropped, unless a function letter follows the bound ("from 0 to 1 f of x"). Spoken bounds after the integrand stay words.
+bounds: {after: ["INT", "SUM", "PROD"], from: SUB, to: POW}
+
+# A bare "to the" is an exponent only when what follows can be one: a number, a single letter, a sign word, "power", an ordinal, a
+# function name, a Greek letter, a root or a grouping word ("e to the log x"); never "to the limit" or "to the left".
+exponent_follows: {categories: ["functions", "greek"], canons: ["SQRT", "CBRT", "LPAREN", "ABS", "MINUS"], except_canons: ["LIM"]}
+
+# Digit ordinals ("3rd", "9th", "2 3rds"): after POW they are the exponent ("to the 9th power" -> POW 9); after a number they are
+# a fraction ("1 3rd" -> 1 OVER 3, "a 3rd" -> 1 OVER 3); "nth" and "kth" after POW are the letter. Elsewhere they are kept verbatim.
+ordinal_suffixes: ["st", "nd", "rd", "th"]
+
+# Post-rewrites on the token sequence: the notation side of constructs whose word side is one surface. Grouping tokens between the
+# pattern's elements are skipped and removed ("sin^{-1}" = "sin^-1").
+#   d OVER d            -> DERIV      ("d/dx" = "d by d x")
+#   SIN POW MINUS 1     -> ARCSIN     ("sin^-1 x" = "arcsin x"; likewise COS, TAN)
+post_rewrites:
+  - {from: ["d", "OVER", "d"], to: ["DERIV"]}
+  - {from: ["SIN", "POW", "MINUS", "1"], to: ["ARCSIN"]}
+  - {from: ["COS", "POW", "MINUS", "1"], to: ["ARCCOS"]}
+  - {from: ["TAN", "POW", "MINUS", "1"], to: ["ARCTAN"]}
+
+# Greek letters: word side = English name, symbol side = the letter. Case is not spoken, so both cases share one key (lower-casing).
+greek:
+  alpha: α
+  beta: β
+  gamma: γ
+  delta: δ
+  epsilon: ε
+  theta: θ
+  lambda: λ
+  mu: μ
+  pi: π
+  rho: ρ
+  sigma: σ
+  tau: τ
+  phi: φ
+  omega: ω
+
+# Functions: word side = spoken names; symbol side = the conventional abbreviation.
+functions:
+  SIN: {words: ["sine", "sin"], symbols: ["sin"]}
+  COS: {words: ["cosine", "cos"], symbols: ["cos"]}
+  TAN: {words: ["tangent", "tan"], symbols: ["tan"]}
+  ARCSIN: {words: ["inverse sine", "sine inverse", "arc sine", "arcsine", "inverse sin", "sin inverse", "arcsin"], symbols: ["arcsin", "asin"]}
+  ARCCOS: {words: ["inverse cosine", "cosine inverse", "arc cosine", "arccosine", "inverse cos", "cos inverse", "arccos"], symbols: ["arccos", "acos"]}
+  ARCTAN: {words: ["inverse tangent", "tangent inverse", "arc tangent", "arctangent", "inverse tan", "tan inverse", "arctan"], symbols: ["arctan", "atan"]}
+  LOG: {words: ["log", "logarithm", "log base"], symbols: ["log"]}
+  LN:  {words: ["natural log", "natural logarithm", "ln"], symbols: ["ln"]}
+  EXP: {words: ["exponential"], symbols: ["exp"]}   # "e to the" is NOT a surface: it is e POW (ambiguous with "to the power of")
+  LIM: {words: ["the limit", "limit"], symbols: ["lim"]}
+
+# Number words (word side). Digits are the symbol side.
+numbers:
+  units: {zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12,
+          thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19}
+  tens: {twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90}
+  scales: {hundred: 100, thousand: 1000, million: 1000000}
+  fractions: {half: "OVER 2", halves: "OVER 2", third: "OVER 3", thirds: "OVER 3", quarter: "OVER 4", quarters: "OVER 4",
+              fourth: "OVER 4", fourths: "OVER 4", fifth: "OVER 5", fifths: "OVER 5"}
+  articles_as_one: ["a", "an"]      # "a half" -> 1 OVER 2 before a fraction word
+  # ordinal words read as exponents after "to the" ("x to the fourth" = x^4); "third"/"fourth"/"fifth" remain fraction words elsewhere
+  ordinals: {first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10}
+# Short letter runs with no English reading ("ax", "dx") are products or differentials written without spaces: they are split into
+# letters when <= 3 letters, not a grammar surface, and below this wordfreq Zipf threshold. "by", "in", "an" stay words.
+letter_run_split: {max_len: 3, max_zipf: 3.0}
+
+# Words with no mathematical content, dropped on both sides before comparison ("of" is handled by `application`).
+fillers: ["the", "and", "um", "uh", "so", "okay", "then", "all", "that", "this", "we", "have", "get", "you"]
+
+# Categories whose firing on the hypothesis decides the form produced F_i (words vs notation). Greek-letter names and function
+# abbreviations ("pi", "sin") are the same in spoken and written mathematics, so they do not decide the form; numbers and
+# operators/relations do. Grouping tokens (LPAREN/RPAREN/ABS) are recorded as fired surfaces but excluded from the compared
+# canonical string, because spoken forms rarely verbalise grouping.
+form_categories: [phrases, numbers]
+grouping_tokens: [LPAREN, RPAREN, ABS]

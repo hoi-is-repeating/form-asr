@@ -1,0 +1,5 @@
+{"category": "numbers", "recognizer_id": "whisper", "n_word_side": 260, "n_symbol_side": 807, "deciding": true, "dominant": "notation", "fallback": 0, "fallback_reason": null}
+{"category": "operators", "recognizer_id": "whisper", "n_word_side": 1828, "n_symbol_side": 19, "deciding": true, "dominant": "words", "fallback": 0, "fallback_reason": null}
+{"category": "roots_exponents", "recognizer_id": "whisper", "n_word_side": 622, "n_symbol_side": 0, "deciding": true, "dominant": "words", "fallback": 0, "fallback_reason": null}
+{"category": "greek", "recognizer_id": "whisper", "n_word_side": 249, "n_symbol_side": 3, "deciding": false, "dominant": null, "fallback": 0, "fallback_reason": "non-deciding category (descriptive)"}
+{"category": "functions", "recognizer_id": "whisper", "n_word_side": 248, "n_symbol_side": 0, "deciding": false, "dominant": null, "fallback": 0, "fallback_reason": "non-deciding category (descriptive)"}

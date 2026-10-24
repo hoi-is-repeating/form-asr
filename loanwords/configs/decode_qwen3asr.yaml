@@ -1,0 +1,13 @@
+# Decode configuration for recognizer `qwen3asr`.
+id: qwen3asr
+checkpoint: Qwen/Qwen3-ASR-1.7B
+revision: 7278e1e70fe206f11671096ffdd38061171dd6e5
+env_name: ch3-hf4
+framework: qwen-asr==0.0.6 (transformers==4.57.6)
+dtype: bfloat16
+batch_size: 1            # batch > 1 was not deterministic for this decoder
+sampling_rate: 16000
+generation:
+  max_new_tokens: 256
+  greedy: true           # toolkit evaluation setting (README); no sampling parameters exposed
+prompt_slot: system      # context in the system prompt (technical report, Sec. 2.2)

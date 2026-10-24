@@ -1,0 +1,17 @@
+# Environment: Omnilingual ASR (fairseq2)
+omnilingual-asr==0.2.0
+fairseq2==0.6.0
+torch==2.8.0
+torchaudio==2.8.0
+numpy
+statsmodels==0.15.0
+datasets
+scipy
+jiwer==4.0.0
+rapidfuzz>=3.14
+regex>=2024.0
+pyyaml>=6.0
+jsonschema>=4.0
+jamo>=0.4
+soundfile>=0.12
+huggingface_hub>=0.35

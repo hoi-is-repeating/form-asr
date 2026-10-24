@@ -1,0 +1,14 @@
+# Decode configuration for recognizer `raon` (English).
+id: raon
+checkpoint: KRAFTON/Raon-Speech-9B
+revision: cd84c5bf53f6a7f8747f653dbbe7fc5e3c3471a4   # remote code pinned to this revision
+env_name: ch3-hf4
+framework: transformers>=4.57.1,<5.0 (trust_remote_code)
+dtype: bfloat16
+batch_size: 1
+sampling_rate: 16000
+instruction: "Transcribe the audio into text."   # tech report Table 1 STT format
+generation:
+  do_sample: false
+prompt_slot: user_text   # prompt + newline + instruction (slot frame in labels/precedents.v1.json)
+license: CC BY-NC 4.0 (weights)

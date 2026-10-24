@@ -1,0 +1,11 @@
+# Off-task (instruction-following failure) patterns; HiKE (Sec. 4.3) names the failure mode. A hypothesis is flagged `off_task`
+# when any pattern matches (case-insensitive) or when it contains the slot-frame instruction text.
+version: v1
+patterns:
+  - "^\\s*(죄송|미안)"                       # apology openers
+  - "^\\s*(the audio|this audio|i cannot|i can't|i'm sorry|sorry,)"
+  - "(cannot|can't|unable to) (transcribe|hear|understand)"
+  - "^\\s*(sure|certainly|here is|here's)"
+  - "(as an ai|language model)"
+  - "^\\s*(네,? )?(알겠|여기 )"             # Korean assistant-style openers
+  - "transcribe the audio into text"        # echoed instruction (raon frame)

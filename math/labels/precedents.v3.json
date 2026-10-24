@@ -1,0 +1,284 @@
+{
+ "version": "v3",
+ "extends": {
+  "file": "precedents.v2.json",
+  "prompts_sha256": "97d856a67f8b392b1217adb904d3407a61b7e5c065710a5c132ad5f8611d3daa"
+ },
+ "texts": {
+  "W1": "Okay, so suppose y cubed minus eight equals zero. Then take the square root of minus one and call it i. Now look at one over n as n grows, and finally at three x plus two y.",
+  "S1": "Okay, so suppose y^3 - 8 = 0. Then take sqrt(-1) and call it i. Now look at 1/n as n grows, and finally at 3x + 2y.",
+  "W2": "Right, so we had two to the power of ten yesterday. Today we multiply, alpha times beta, then divide, z over four, and we subtract, seven minus three, and we are done.",
+  "S2": "Right, so we had 2^10 yesterday. Today we multiply, α × β, then divide, z/4, and we subtract, 7 - 3, and we are done.",
+  "N0": "Okay, so, um, right, and then, well, anyway.",
+  "M1a": "Okay, so suppose y cubed minus 8 equals 0. Then take the square root of minus 1 and call it i. Now look at 1 over n as n grows, and finally at 3 x plus 2 y.",
+  "M1b": "Right, so we had 2 to the power of 10 yesterday. Today we multiply, alpha times beta, then divide, z over 4, and we subtract, 7 minus 3, and we are done.",
+  "M2a": "Okay, so suppose y^three - eight = zero. Then take sqrt(-one) and call it i. Now look at one/n as n grows, and finally at three x + two y.",
+  "M2b": "Right, so we had two^ten yesterday. Today we multiply, α × β, then divide, z/four, and we subtract, seven - three, and we are done."
+ },
+ "generic_pairs": [
+  [
+   "y cubed minus eight equals zero",
+   "y^3 - 8 = 0"
+  ],
+  [
+   "the square root of minus one",
+   "sqrt(-1)"
+  ],
+  [
+   "one over n",
+   "1/n"
+  ],
+  [
+   "three x plus two y",
+   "3x + 2y"
+  ],
+  [
+   "two to the power of ten",
+   "2^10"
+  ],
+  [
+   "alpha times beta",
+   "α × β"
+  ],
+  [
+   "z over four",
+   "z/4"
+  ],
+  [
+   "seven minus three",
+   "7 - 3"
+  ]
+ ],
+ "generic_pairs_mixed": {
+  "M1": [
+   [
+    "y cubed minus eight equals zero",
+    "y cubed minus 8 equals 0"
+   ],
+   [
+    "the square root of minus one",
+    "the square root of minus 1"
+   ],
+   [
+    "one over n",
+    "1 over n"
+   ],
+   [
+    "three x plus two y",
+    "3 x plus 2 y"
+   ],
+   [
+    "two to the power of ten",
+    "2 to the power of 10"
+   ],
+   [
+    "alpha times beta",
+    "alpha times beta"
+   ],
+   [
+    "z over four",
+    "z over 4"
+   ],
+   [
+    "seven minus three",
+    "7 minus 3"
+   ]
+  ],
+  "M2": [
+   [
+    "y cubed minus eight equals zero",
+    "y^three - eight = zero"
+   ],
+   [
+    "the square root of minus one",
+    "sqrt(-one)"
+   ],
+   [
+    "one over n",
+    "one/n"
+   ],
+   [
+    "three x plus two y",
+    "three x + two y"
+   ],
+   [
+    "two to the power of ten",
+    "two^ten"
+   ],
+   [
+    "alpha times beta",
+    "α × β"
+   ],
+   [
+    "z over four",
+    "z/four"
+   ],
+   [
+    "seven minus three",
+    "seven - three"
+   ]
+  ]
+ },
+ "slot_frames": {
+  "whisper": {
+   "slot": "prefix",
+   "frame": "{prompt}"
+  },
+  "whisper_base": {
+   "slot": "prefix",
+   "frame": "{prompt}"
+  },
+  "whisper_small": {
+   "slot": "prefix",
+   "frame": "{prompt}"
+  },
+  "whisper_large_v2": {
+   "slot": "prefix",
+   "frame": "{prompt}"
+  },
+  "owsm": {
+   "slot": "prefix",
+   "frame": "{prompt}"
+  },
+  "qwen3asr": {
+   "slot": "system",
+   "frame": "{prompt}"
+  },
+  "raon": {
+   "slot": "user_text",
+   "frame": "Transcribe the audio into text. Output only the transcript of the audio.\nFor reference only (do not repeat it), earlier in the lecture the speaker said: \"{prompt}\""
+  }
+ },
+ "token_counts": {
+  "W1": 43,
+  "S1": 45,
+  "W2": 41,
+  "S2": 39,
+  "N0": 15,
+  "M1a": 43,
+  "M1b": 41,
+  "M2a": 45,
+  "M2b": 39
+ },
+ "diffs": {
+  "W1/S1": [
+   [
+    "y cubed minus eight equals zero",
+    "y^3 - 8 = 0"
+   ],
+   [
+    "the square root of minus one",
+    "sqrt(-1)"
+   ],
+   [
+    "one over n",
+    "1/n"
+   ],
+   [
+    "three x plus two y",
+    "3x + 2y"
+   ]
+  ],
+  "W2/S2": [
+   [
+    "two to the power of ten",
+    "2^10"
+   ],
+   [
+    "alpha times beta",
+    "α × β"
+   ],
+   [
+    "z over four",
+    "z/4"
+   ],
+   [
+    "seven minus three",
+    "7 - 3"
+   ]
+  ],
+  "W1/M1a": [
+   [
+    "y cubed minus eight equals zero",
+    "y cubed minus 8 equals 0"
+   ],
+   [
+    "the square root of minus one",
+    "the square root of minus 1"
+   ],
+   [
+    "one over n",
+    "1 over n"
+   ],
+   [
+    "three x plus two y",
+    "3 x plus 2 y"
+   ]
+  ],
+  "W2/M1b": [
+   [
+    "two to the power of ten",
+    "2 to the power of 10"
+   ],
+   [
+    "alpha times beta",
+    "alpha times beta"
+   ],
+   [
+    "z over four",
+    "z over 4"
+   ],
+   [
+    "seven minus three",
+    "7 minus 3"
+   ]
+  ],
+  "W1/M2a": [
+   [
+    "y cubed minus eight equals zero",
+    "y^three - eight = zero"
+   ],
+   [
+    "the square root of minus one",
+    "sqrt(-one)"
+   ],
+   [
+    "one over n",
+    "one/n"
+   ],
+   [
+    "three x plus two y",
+    "three x + two y"
+   ]
+  ],
+  "W2/M2b": [
+   [
+    "two to the power of ten",
+    "two^ten"
+   ],
+   [
+    "alpha times beta",
+    "α × β"
+   ],
+   [
+    "z over four",
+    "z/four"
+   ],
+   [
+    "seven minus three",
+    "seven - three"
+   ]
+  ]
+ },
+ "forbidden_from": [
+  "accept_sets.v1.jsonl"
+ ],
+ "prompts_sha256": "2b7486aa80e558db61133807d7bebba7d7cf208a9763e94e85e1786d3db5ab1e",
+ "frame_amendment": {
+  "recognizer": "raon",
+  "v2_frame": "{prompt}\nTranscribe the audio into text.",
+  "v3_frame": "Transcribe the audio into text. Output only the transcript of the audio.\nFor reference only (do not repeat it), earlier in the lecture the speaker said: \"{prompt}\"",
+  "label": "B",
+  "reason": "v2 frame failed the injection test on the mathematical precedents (prompt echo / continuation); candidate frames fixed before any outcome was read, judged on the injection criteria only"
+ }
+}

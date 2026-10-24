@@ -1,0 +1,15 @@
+# Off-task output patterns for English mathematical speech. An output matching one is flagged `off_task` unless the
+# reference matches the same pattern. Case-insensitive regular expressions.
+version: off_task_patterns.v1
+patterns:
+  - "\\bas an ai\\b"
+  - "\\bi('m| am) sorry\\b"
+  - "\\bi (cannot|can't|am unable to|do not have)\\b"
+  - "\\bplease provide\\b"
+  - "\\b(here is|here's) (the|your) (transcription|transcript)\\b"
+  - "\\btranscription:\\s*$"
+  - "\\bthe (audio|recording|speaker) (says|is saying|contains)\\b"
+  - "\\bthank(s| you) for watching\\b"
+  - "\\bsubtitles? by\\b"
+  - "\\bno speech detected\\b"
+  - "\\[(music|applause|laughter|inaudible|blank_audio)\\]"

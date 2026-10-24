@@ -1,0 +1,12 @@
+# Patterns that mark an output as an answer to the mathematics rather than a transcript of it (flag `solved`).
+# Case-insensitive regular expressions.
+version: solved_patterns.v1
+patterns:
+  - "^\\s*the answer is\\b"
+  - "^\\s*the result is\\b"
+  - "^\\s*the (value|solution) (is|of)\\b"
+  - "\\bsimplif(y|ies|ied) to\\b"
+  - "\\bwhich (equals|gives|evaluates to)\\b"
+  - "\\btherefore\\b.*="
+  - "^\\s*(sure|certainly|here is|here's)\\b"      # assistant preamble from an instruction-tuned decoder
+  - "\\bi (cannot|can't|am unable to)\\b"          # refusal frame

@@ -1,0 +1,131 @@
+{
+ "version": "v1",
+ "texts": {
+  "H1": "아침에 택시를 타고 회사에 갔어요. 점심에는 오렌지 주스를 마시고 아이스크림을 먹었어요.",
+  "L1": "아침에 taxi를 타고 회사에 갔어요. 점심에는 orange juice를 마시고 ice cream을 먹었어요.",
+  "H2": "저녁에 라디오를 들으면서 피아노를 쳤어요. 간식으로 바나나와 초콜릿을 먹었어요.",
+  "L2": "저녁에 radio를 들으면서 piano를 쳤어요. 간식으로 banana와 chocolate을 먹었어요.",
+  "N0": "네 그래서 그리고 그런데 음 그렇죠",
+  "R1": "achime taeksireul tago hoesae gasseoyo. jeomsimeneun orenji juseureul masigo aiseukeurimeul meogeosseoyo.",
+  "R2": "jeonyeoge radioreul deureumyeonseo pianoreul chyeosseoyo. gansigeuro bananawa chokolriseul meogeosseoyo."
+ },
+ "generic_pairs": [
+  [
+   "택시",
+   "taxi"
+  ],
+  [
+   "오렌지",
+   "orange"
+  ],
+  [
+   "주스",
+   "juice"
+  ],
+  [
+   "아이스크림",
+   "ice cream"
+  ],
+  [
+   "라디오",
+   "radio"
+  ],
+  [
+   "피아노",
+   "piano"
+  ],
+  [
+   "바나나",
+   "banana"
+  ],
+  [
+   "초콜릿",
+   "chocolate"
+  ]
+ ],
+ "slot_frames": {
+  "whisper": {
+   "slot": "prefix",
+   "frame": "{prompt}"
+  },
+  "owsm": {
+   "slot": "prefix",
+   "frame": "{prompt}"
+  },
+  "qwen3asr": {
+   "slot": "system",
+   "frame": "{prompt}"
+  },
+  "raon": {
+   "slot": "user_text",
+   "frame": "{prompt}\nTranscribe the audio into text."
+  }
+ },
+ "token_counts": {
+  "H1": 34,
+  "L1": 26,
+  "H2": 34,
+  "L2": 24,
+  "N0": 6,
+  "R1": 41,
+  "R2": 39
+ },
+ "diffs": {
+  "H1/L1": [
+   [
+    "택시를",
+    "taxi를"
+   ],
+   [
+    "오렌지",
+    "orange"
+   ],
+   [
+    "주스를",
+    "juice를"
+   ],
+   [
+    "아이스크림을",
+    "ice cream을"
+   ]
+  ],
+  "H2/L2": [
+   [
+    "라디오를",
+    "radio를"
+   ],
+   [
+    "피아노를",
+    "piano를"
+   ],
+   [
+    "바나나와",
+    "banana와"
+   ],
+   [
+    "초콜릿을",
+    "chocolate을"
+   ]
+  ]
+ },
+ "checks": {
+  "forbidden_set": "passed",
+  "lexical_match": "passed",
+  "n0_no_content_word": "passed",
+  "token_limits": {
+   "H1": 34,
+   "L1": 26,
+   "H2": 34,
+   "L2": 24,
+   "N0": 6,
+   "R1": 41,
+   "R2": 39
+  },
+  "forbidden_set_size": 690
+ },
+ "prompts_sha256": "8d888d6986d239d3e6fa8d441fabd09a3e0c9706493429de047015c95889b6a1",
+ "forbidden_from": [
+  "accept_sets.hike.draft.jsonl",
+  "accept_sets.v1.jsonl"
+ ]
+}

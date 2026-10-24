@@ -1,0 +1,5 @@
+{"category": "numbers", "recognizer_id": "qwen3asr", "n_word_side": 1087, "n_symbol_side": 191, "deciding": true, "dominant": "words", "fallback": 0, "fallback_reason": null}
+{"category": "operators", "recognizer_id": "qwen3asr", "n_word_side": 2173, "n_symbol_side": 0, "deciding": true, "dominant": "words", "fallback": 0, "fallback_reason": null}
+{"category": "roots_exponents", "recognizer_id": "qwen3asr", "n_word_side": 733, "n_symbol_side": 0, "deciding": true, "dominant": "words", "fallback": 0, "fallback_reason": null}
+{"category": "greek", "recognizer_id": "qwen3asr", "n_word_side": 256, "n_symbol_side": 0, "deciding": false, "dominant": null, "fallback": 0, "fallback_reason": "non-deciding category (descriptive)"}
+{"category": "functions", "recognizer_id": "qwen3asr", "n_word_side": 258, "n_symbol_side": 0, "deciding": false, "dominant": null, "fallback": 0, "fallback_reason": "non-deciding category (descriptive)"}

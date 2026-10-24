@@ -1,0 +1,15 @@
+# Decode configuration for recognizer `cohere`.
+id: cohere
+checkpoint: CohereLabs/cohere-transcribe-03-2026
+revision: b1eacc2686a3d08ceaae5f24a88b1d519620bc09   # gated: accept the card terms; HF_TOKEN from the environment
+env_name: ch3
+framework: transformers>=5.4
+dtype: bfloat16
+batch_size: 8
+sampling_rate: 16000
+punctuation: false
+generation:
+  do_sample: false
+  num_beams: 1
+  max_new_tokens: 256
+prompt_slot: unsupported

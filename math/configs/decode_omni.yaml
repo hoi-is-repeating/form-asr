@@ -1,0 +1,12 @@
+# Decode configuration for recognizer `omni` (English).
+id: omni
+checkpoint: omniASR_LLM_7B_v2          # omnilingual-asr model card name
+revision: omnilingual-asr==0.2.0       # package version; there is no HF revision
+env_name: ch3-omni
+framework: omnilingual-asr==0.2.0 (fairseq2)
+dtype: bfloat16
+batch_size: 1                  # batch > 1 was not deterministic for this decoder
+sampling_rate: 16000
+lang: eng_Latn
+max_audio_s: 40
+prompt_slot: unsupported

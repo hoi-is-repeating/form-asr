@@ -1,0 +1,62 @@
+# Spoken-form-to-LaTeX converters: the default is the fixed converter, the others are comparators.
+version: converter.v1-draft
+default: legacy_two_stage
+
+converters:
+  # Two-stage Qwen2.5-Math-1.5B corrector and translator (LoRA r 32, alpha 64, dropout 0.05, 3 epochs, 10k synthetic pairs);
+  # best checkpoints at step 3,500 (corrector) and 2,000 (translator). Chat template, greedy decoding, first output line kept.
+  legacy_two_stage:
+    kind: hf_lora_two_stage
+    base_model: Qwen/Qwen2.5-Math-1.5B-Instruct
+    base_revision: aafeb0fc6f22cbf0eaeed126eff8be45b0360a35
+    adapters:
+      corrector: ${CH4_CKPT}/models/qwen2.5-math-1.5b_two_stage_corrector/best     # = checkpoint-3500 (same sha256)
+      translator: ${CH4_CKPT}/models/qwen2.5-math-1.5b_two_stage_translator/best  # = checkpoint-2000 (same sha256)
+    adapter_sha256:
+      corrector: 7e0601e443cfefd2219e3c2b0529d9d3980d269a7068ce6129cbc3a0836644ab    # adapter_model.safetensors
+      translator: 151fa3a37b5ca240e0864fb7b363a0185ac7a5fe184cbef3349385d901bdd2e9
+    prompts:
+      corrector:
+        system: "You are an ASR error corrector for mathematical speech. Fix any transcription errors in the spoken mathematical expression."
+        user_prefix: "Correct this transcription: "
+      translator:
+        system: "You are a mathematical expression translator. Convert the spoken English description of a mathematical formula into LaTeX."
+        user_prefix: "Translate to LaTeX: "
+    generation: {do_sample: false, num_beams: 1, max_new_tokens: 128}
+    postprocess: first_line
+    dtype: bfloat16
+    size_class: "1.5B"
+    training_data: "10k synthetic (TTS) pairs"
+
+  # Speech-to-LaTeX post-correction checkpoints (Korzh et al., ICLR 2026), same base and size; prompt and decoding as in its
+  # ASRPostCorrection code. The LaTeX line of the answer is taken. The checkpoint cards declare no license (code MIT).
+  s2l_equations:
+    kind: hf_causal
+    model: marsianin500/Qwen2.5-math-1.5B-instruct-equations_multilingual_mix_full
+    revision: 2329eac0e9b106f07e691cdac400e760265c6a29
+    prompts:
+      system: "You are a helpful assistant."
+      user_prefix: "Please, give me LaTeX representation of the following formula. Formula pronunciation: "
+    generation: {do_sample: false, num_beams: 3, no_repeat_ngram_size: 4, max_new_tokens: 128}
+    postprocess: s2l_latex_line
+    dtype: bfloat16
+    size_class: "1.5B"
+    training_data: "S2L 66k human + 571k synthetic clips (Korzh et al. 2026)"
+
+  s2l_sentences:
+    kind: hf_causal
+    model: marsianin500/Qwen2.5-math-1.5B-instruct-sentences_eng_mix
+    revision: 94bc54a177a65621310b79ebda5f563810e1d934
+    prompts:
+      system: "You are a helpful assistant."
+      user_prefix: "Please, give me LaTeX representation of the following formula. Formula pronunciation: "
+    generation: {do_sample: false, num_beams: 3, no_repeat_ngram_size: 4, max_new_tokens: 256}
+    postprocess: s2l_latex_line
+    dtype: bfloat16
+    size_class: "1.5B"
+    training_data: "S2L sentences (English mix)"
+
+  # Test double: a lookup table (fixture only; never writes outside a fixture directory).
+  fake:
+    kind: fake
+    table: tests/fixtures/ch4_synth/converter_table.json
