@@ -46,7 +46,7 @@ def rebuild(path: Path, transcripts: dict[int, str]) -> bytes:
         from math_eval.mathforms import grammar
     except ImportError:
         raise SystemExit(
-            "needs the math_eval package of https://github.com/hoi-is-repeating/form-asr (pip install -e math)"
+            "needs the math_eval package of https://github.com/olivia-shin-kim/form-asr (pip install -e math)"
         )
     g = grammar()
     out = []

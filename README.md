@@ -59,9 +59,9 @@ mono WAV named `<video_id>.wav`, and pass the folder as `--lectures-dir`. Interm
 `outputs/` inside each project (`LOANWORDS_WORK`, `MATH_WORK` and the matching `*_DATA` variables move them).
 
 Released datasets on Hugging Face:
-[`hoi-is-repeating/form-hike-labels`](https://huggingface.co/datasets/hoi-is-repeating/form-hike-labels),
-[`hoi-is-repeating/form-indiscourse-math`](https://huggingface.co/datasets/hoi-is-repeating/form-indiscourse-math) and
-[`hoi-is-repeating/form-tts-loanword-pairs`](https://huggingface.co/datasets/hoi-is-repeating/form-tts-loanword-pairs)
+[`olivia-shin-kim/form-hike-labels`](https://huggingface.co/datasets/olivia-shin-kim/form-hike-labels),
+[`olivia-shin-kim/form-indiscourse-math`](https://huggingface.co/datasets/olivia-shin-kim/form-indiscourse-math) and
+[`olivia-shin-kim/form-tts-loanword-pairs`](https://huggingface.co/datasets/olivia-shin-kim/form-tts-loanword-pairs)
 (the synthetic loanword / native pairs with audio).
 
 ## Running
