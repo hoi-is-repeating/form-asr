@@ -7,6 +7,8 @@ authors:
     given-names: Olivia S.
     affiliation: Emory University
 license: MIT
+doi: 10.5281/zenodo.23700332
+repository-code: "https://github.com/olivia-shin-kim/form-asr"
 preferred-citation:
   type: thesis
   title: "FORM: Form-tolerant Outcomes of Recognition for Multi-form Items"

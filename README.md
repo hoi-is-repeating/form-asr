@@ -1,5 +1,7 @@
 # FORM: Form-tolerant Outcomes of Recognition for Multi-form Items
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23700332.svg)](https://doi.org/10.5281/zenodo.23700332)
+
 Code and labels for the M.S. thesis *FORM: Form-tolerant Outcomes of Recognition for Multi-form Items* (Olivia S. Kim, Emory
 University, 2026).
 
@@ -106,6 +108,8 @@ The tests run every script end to end on a synthetic fixture with a test decoder
 Code: MIT (`LICENSE`). Labels carry the license of the material they are derived from; see `DATA_LICENSES.md`.
 
 ## Citation
+
+The code is archived on Zenodo: [10.5281/zenodo.23700332](https://doi.org/10.5281/zenodo.23700332) (all versions).
 
 ```bibtex
 @mastersthesis{kim2026form,
